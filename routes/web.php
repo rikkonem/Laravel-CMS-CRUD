@@ -55,3 +55,7 @@ Route::namespace('Auth')->group(function () {
     Route::get('/logout', 'LoginController@logout');
 
 });
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
