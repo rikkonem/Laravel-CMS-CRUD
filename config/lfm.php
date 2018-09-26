@@ -23,7 +23,7 @@ return [
     'url_prefix' => 'laravel-filemanager',
 
     // Use relative paths (without domain)
-    'relative_paths' => false,
+    'relative_paths' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'allow_multi_user'   => true,
+    'allow_multi_user'   => false,
 
     'allow_share_folder' => true,
 
@@ -56,7 +56,7 @@ return [
         'file' => [
             'folder_name'  => 'files',
             'startup_view' => 'grid',
-            'max_size'     => 50000,
+            'max_file_size'     => 50000,
             'valid_mime'   => [
                 'image/jpeg',
                 'image/pjpeg',
@@ -68,7 +68,7 @@ return [
         'image' => [
             'folder_name'  => 'photos',
             'startup_view' => 'list',
-            'max_size'     => 50000,
+            'max_image_size'     => 50000,
             'valid_mime'   => [
                 'image/jpeg',
                 'image/pjpeg',
