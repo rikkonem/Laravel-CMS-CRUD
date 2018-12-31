@@ -17,18 +17,17 @@ Route::get('/', 'PostController@index');
 
 Route::prefix('posts')->group( function() {
 
-    Route::post('/', 'PostController@store')->middleware('auth')->name('post.store');
+    Route::post('/', 'PostController@store')->name('post.store');
 
-    Route::name('post.create')->get('create', 'PostController@create')->middleware('auth');
+    Route::name('post.create')->get('create', 'PostController@create');
 
     Route::name('post.show')->get('{post}', 'PostController@show');
 
-    Route::name('post.destroy')->delete('{post}', 'PostController@destroy')->middleware('auth');
+    Route::name('post.destroy')->delete('{post}', 'PostController@destroy');
 
-    Route::name('post.edit')->get('edit/{post}', 'PostController@edit')->middleware('auth');
+    Route::name('post.edit')->get('edit/{post}', 'PostController@edit');
 
-    Route::name('post.update')->patch('{post}', 'PostController@update')->middleware('auth');
-
+    Route::name('post.update')->patch('{post}', 'PostController@update');
 });
 
 
@@ -36,21 +35,19 @@ Route::delete('/comments/{comment}', 'CommentController@destroy');
 
 Route::patch('/posts/{post}/comments', 'CommentController@store');
 
-
 Auth::routes();
-
 
 Route::namespace('Auth')->group(function () {
 
-    Route::get('settings/passwordChange', 'ResetPasswordController@showChangeForm')->middleware('auth');
+    Route::get('settings/passwordChange', 'ResetPasswordController@showChangeForm');
 
-    Route::name('changePassword')->post('changePassword', 'ResetPasswordController@changePassword')->middleware('auth');
+    Route::name('changePassword')->post('changePassword', 'ResetPasswordController@changePassword');
 
-    Route::get('settings/emailChange', 'EmailController@showChangeForm')->middleware('auth');
+    Route::get('settings/emailChange', 'EmailController@showChangeForm');
 
-    Route::post('changeEmail', 'EmailController@changeEmail')->name('changeEmail')->middleware('auth');
+    Route::post('changeEmail', 'EmailController@changeEmail')->name('changeEmail');
 
-    Route::get('add-user', 'RegisterController@showRegistrationForm')->name('register')->middleware('auth');
+    Route::get('add-user', 'RegisterController@showRegistrationForm')->name('register');
 
     Route::get('/logout', 'LoginController@logout');
 

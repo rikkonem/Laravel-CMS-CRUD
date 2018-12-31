@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\PasswordRequest;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,18 +42,13 @@ class ResetPasswordController extends Controller
         $this->middleware('auth');
     }
 
-    public function changePassword(Request $request) {
+    public function changePassword(PasswordRequest $request) {
 
         if(!Hash::check(
             $request->get('current_password'), $request->user()->password, []) ||
             $request->get('new_password') != $request->get('confirm_password')) {
           return redirect('/settings/passwordChange')->with('status', 'Wrong password');
         }
-
-        $request->validate([
-           'current_password' => 'required',
-            'new_password' => 'required|string|min:6'
-        ]);
 
         $user = $request->user();
         $user->password = bcrypt($request->get('new_password'));

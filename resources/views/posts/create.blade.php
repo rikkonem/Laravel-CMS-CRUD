@@ -14,7 +14,7 @@
         </form>
     </div>
 @include('common.errors')
-   <script src="{{ asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+   <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
    <script>
        var route_prefix = "{{ url(config('lfm.url_prefix')) }}";
        CKEDITOR.replace( 'post-ckeditor', {
@@ -24,7 +24,6 @@
            filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
 
        });
-
 
    </script>
 @endsection

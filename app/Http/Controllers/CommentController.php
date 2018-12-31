@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Post;
 
 class CommentController extends Controller
 {
-    public function store(Post $post) {
 
-        $this->validate(request(), [
-           'body' => 'required'
-        ]);
+    public function __construct()
+    {
+        $this->middleware('auth')->only('destroy');
+    }
 
-        $post->addComment(request('body'));
+    public function store(Post $post, CommentRequest $request) {
+
+        $post->addComment($request->body);
 
         return back();
     }
@@ -23,7 +25,6 @@ class CommentController extends Controller
 
          $comment = Comment::where('id', $id)->firstOrFail();
          $comment->delete();
-
 
         return back();
     }

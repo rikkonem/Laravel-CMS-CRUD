@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show', 'index']);
+    }
 
     public function index() {
 
@@ -17,7 +22,6 @@ class PostController extends Controller
             "posts" => $posts,
         ]);
     }
-
 
     public function show(Post $post) {
 
@@ -32,19 +36,13 @@ class PostController extends Controller
     }
 
 
-    public function store(Request $request) {
-
-        $this->validate(request(), [
-            'title' => 'required',
-            'body' => 'required',
-        ]);
+    public function store(PostRequest $request) {
 
          Post::create([
             'title' => $request->title,
             'body' => $request->body,
             'user_id' =>  Auth::user()->id
     ]);
-
 
         return redirect('/')->with('status', 'The post has been added');
     }
@@ -66,13 +64,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id) {
-
-        $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required'
-
-        ]);
+    public function update(PostRequest $request, $id) {
 
         $post = Post::find($id);
         $post->title = $request['title'];
@@ -81,7 +73,4 @@ class PostController extends Controller
 
         return redirect('/')->with('status', 'The post has been edited');
     }
-
-
-
 }
