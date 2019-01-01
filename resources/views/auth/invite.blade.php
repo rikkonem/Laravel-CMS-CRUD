@@ -4,7 +4,7 @@
     <div class="form-container">
         @include('common.status')
 
-        <h4>Add User</h4>
+        <h4>Invite User</h4>
         <form  method="POST" action="{{ url('invite') }}">
             {{ csrf_field() }}
 

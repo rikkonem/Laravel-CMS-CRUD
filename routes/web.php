@@ -47,8 +47,6 @@ Route::namespace('Auth')->group(function () {
 
     Route::post('changeEmail', 'EmailController@changeEmail')->name('changeEmail');
 
-    Route::get('add-user', 'RegisterController@showRegistrationForm')->name('register');
-
     Route::get('/logout', 'LoginController@logout');
 
     Route::get('invite-user', 'InviteUserController@create');
@@ -57,7 +55,9 @@ Route::namespace('Auth')->group(function () {
 
 });
 
+Route::get('register', 'RegisterController@showRegistrationForm')->name('show-register-form')->middleware('signed');
 
+Route::post('/register', 'RegisterController@register')->name('register');
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();

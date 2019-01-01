@@ -16,7 +16,9 @@
 
             <input id="password-confirm" type="password" class="form-inputs" name="password_confirmation" placeholder="Confirm password" required>
 
-            <input type="submit" value="Add User">
+            <input type="hidden" value="{{request('role')}}" name="role">
+
+            <input type="submit" value="Register">
         </form>
     </div>
 

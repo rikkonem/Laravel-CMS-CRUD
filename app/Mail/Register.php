@@ -33,7 +33,7 @@ class Register extends Mailable
     {
 
         $url = URL::temporarySignedRoute(
-            'register', now()->addDay(), ['role' => $this->role]
+            'show-register-form', now()->addDay(), ['role' => $this->role]
         );
 
         return $this->markdown('mail.register')->with([

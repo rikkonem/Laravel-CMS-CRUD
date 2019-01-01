@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/register';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('signed')->only('showRegistrationForm');
     }
 
     /**
@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'editor'
+            'role' => $data['role']
         ]);
     }
 
@@ -80,7 +80,7 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         return $this->registered($request, $user)
-            ?: redirect($this->redirectPath())->with('status', "New user has been added");
+            ?: redirect($this->redirectPath())->with('status', "Thank you for registering");
     }
 
 
