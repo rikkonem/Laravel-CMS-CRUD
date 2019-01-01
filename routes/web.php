@@ -51,7 +51,13 @@ Route::namespace('Auth')->group(function () {
 
     Route::get('/logout', 'LoginController@logout');
 
+    Route::get('invite-user', 'InviteUserController@create');
+
+    Route::post('invite', 'InviteUserController@send')->name('invite');
+
 });
+
+
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
