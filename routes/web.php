@@ -55,10 +55,6 @@ Route::namespace('Auth')->group(function () {
 
 });
 
-Route::get('register', 'RegisterController@showRegistrationForm')->name('show-register-form')->middleware('signed');
+Route::get('register', 'RegisterController@showRegistrationForm')->name('show-register-form');
 
 Route::post('/register', 'RegisterController@register')->name('register');
-
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});

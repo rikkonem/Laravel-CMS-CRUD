@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('signed')->only('showRegistrationForm');
+        $this->middleware('signed.redirect')->only('showRegistrationForm');
     }
 
     /**

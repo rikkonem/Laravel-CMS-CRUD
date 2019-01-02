@@ -14,16 +14,11 @@
         </form>
     </div>
 @include('common.errors')
-   <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
-   <script>
-       var route_prefix = "{{ url(config('lfm.url_prefix')) }}";
-       CKEDITOR.replace( 'post-ckeditor', {
-          filebrowserImageBrowseUrl: route_prefix + '?type=Images',
-           filebrowserImageUploadUrl: route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
-           filebrowserBrowseUrl: route_prefix + '?type=Files',
-           filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
-
-       });
-
-   </script>
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script>
+        var route_prefix = "{{ url(config('lfm.url_prefix')) }}";
+        CKEDITOR.replace( 'body' , {
+            removePlugins: 'image, Maximize'
+        });
+    </script>
 @endsection
