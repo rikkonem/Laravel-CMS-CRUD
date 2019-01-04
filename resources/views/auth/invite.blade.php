@@ -12,8 +12,8 @@
 
             <label for="role">Select user role</label>
             <select id="role" name="role" class="form-inputs" required>
-                <option value="Editor">Editor</option>
-                <option value="Admin">Admin</option>
+                <option value="editor">Editor</option>
+                <option value="admin">Admin</option>
             </select>
 
             <input type="submit" value="Send invitation">
